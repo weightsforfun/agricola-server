@@ -3,7 +3,7 @@ package com.example.demo.domain.user.entity;
 
 import com.example.demo.domain.card.entity.Card;
 import com.example.demo.domain.farm.entity.Farm;
-import com.example.demo.domain.resource.Resource;
+import com.example.demo.domain.resource.entity.Resource;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

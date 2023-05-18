@@ -1,4 +1,4 @@
-package com.example.demo.domain.resource;
+package com.example.demo.domain.resource.entity;
 
 
 import com.example.demo.domain.user.entity.User;
