@@ -2,6 +2,7 @@ package com.example.demo.domain.gameRoom.api;
 
 
 import com.example.demo.domain.gameRoom.entity.GameRoom;
+import com.example.demo.domain.gameRoom.service.GameRoomService;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -22,41 +23,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/game-rooms")
 public class GameRoomApi {
     private final SimpMessagingTemplate template;
+    private final GameRoomService gameRoomService;
 
     @GetMapping()
     public List<GameRoom> findAllGameRooms(){
-        ArrayList<GameRoom> gameRooms = new ArrayList<>(5);
-        for (int i=0;i<5;i++){
-            GameRoom gameRoom = GameRoom.builder().
-                    id(i).
-                    people(3)
-                    .build();
-            gameRooms.add(gameRoom);
-        }
+        List<GameRoom> gameRooms = gameRoomService.findAllGameRooms();
 
         return gameRooms;
     }
     @PostMapping()
     public String createGameRoom(){
-        GameRoom gameRoom = GameRoom.builder()
-                .people(3)
-                .id(4)
-                .build();
-        return gameRoom.getId()+"is created";
+        Long gameRoomID = gameRoomService.createGameRoom();
+        return gameRoomID+"is created";
     }
     @GetMapping("/{id}")
-    public String findGameRoom(@PathVariable("id") Long id){
-        //game room 가져와서 인원수 체크
-        //인원수가 4명미만이면 success
-        //아니면 fail
-        //interceptor로 동시에 접근할때도 막아준다.
-        int count=3;
-        if(count<4){
-            return "OK" + id;
-        }
-        else{
-            return "FULL";
-        }
+    public GameRoom findGameRoom(@PathVariable("id") Long id){
+        //인원수 front 에서 체크해서 4명이면 애초에 못들어가게 막고
+        //interceptor 에서도 동시접근하는 경우 생각해서 인원수 고려해서 막기
+        GameRoom gameRoom = gameRoomService.findGameRoom(id);
+        return gameRoom;
     }
 
 

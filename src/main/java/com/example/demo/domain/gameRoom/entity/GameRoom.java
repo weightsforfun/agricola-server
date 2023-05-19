@@ -14,7 +14,7 @@ public class GameRoom {
     @Id
     @GeneratedValue
     @Column(name = "gameRoom_id")
-    private int id; //추후 long으로 변경 repository계층 구현후
+    private Long id; //추후 long으로 변경 repository계층 구현후
 
     //user 4명
 
