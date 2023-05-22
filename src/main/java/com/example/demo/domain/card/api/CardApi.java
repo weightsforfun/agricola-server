@@ -1,7 +1,6 @@
 package com.example.demo.domain.card.api;
 
 
-import com.example.demo.domain.card.dto.EnrollCardReq;
 import com.example.demo.global.dto.CommonReq;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
