@@ -18,7 +18,7 @@ public class GameRoom {
     @Id
     @GeneratedValue
     @Column(name = "gameRoom_id")
-    private Long id; //추후 long으로 변경 repository계층 구현후
+    private Long id; //추후 long 으로 변경 repository 계층 구현후
 
     //user 4명
 
@@ -28,4 +28,10 @@ public class GameRoom {
     //순서
     @Column
     private int people; //현재 인원수
+    public boolean checkCount(){
+        return this.people<4;
+    }
+    public void addUserCount(){
+        this.people++;
+    }
 }
