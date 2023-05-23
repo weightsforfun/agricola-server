@@ -10,13 +10,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class User {
     @GeneratedValue
     @Id
     @Column(name="user_id")
-    private int id;
+    private Long id;
+
+    @Column
+    private int turn; //게임 내 유저 순서
 
     @OneToOne
     @JoinColumn(name = "card_id")
@@ -28,7 +38,7 @@ public class User {
 
     @OneToOne
     @JoinColumn(name = "resource_id")
-    private Resource resource;
+    private Resource resource; //농부 수도 자원에 포함
 
 
 

@@ -27,11 +27,17 @@ public class GameRoom {
 
     //순서
     @Column
+    private int currentTurn; //현재 순서
+
+    @Column
     private int people; //현재 인원수
-    public boolean checkCount(){
-        return this.people<4;
+    public int checkCount(){
+        return this.people;
     }
     public void addUserCount(){
         this.people++;
+    }
+    public int getCurrentTurn(){
+        return (this.currentTurn%4);
     }
 }
