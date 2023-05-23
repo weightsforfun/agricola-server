@@ -26,7 +26,5 @@ public class Farm {
     @Convert(converter = FenceConverter.class)
     private List<List<Integer>> fence= new ArrayList<>(); //울타리
 
-    @OneToOne(mappedBy = "farm")
-    private User user;
 
 }
