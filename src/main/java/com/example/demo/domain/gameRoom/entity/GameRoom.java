@@ -31,7 +31,7 @@ public class GameRoom {
 
     @Column
     private int people; //현재 인원수
-    public int checkCount(){
+    public int getPeopleCount(){
         return this.people;
     }
     public void addUserCount(){
