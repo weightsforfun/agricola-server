@@ -17,21 +17,17 @@ public class UserService {
     private final UserRepository userRepository;
     @Transactional
     @Lock(value = LockModeType.PESSIMISTIC_READ)
-    public boolean initUser(Long gameRoomId){
+    public Integer initUser(Long gameRoomId){
         GameRoom gameRoom = gameRoomRepository.findById(gameRoomId)
                 .orElseThrow(() -> new RuntimeException("no game room"));
-        if(gameRoom.checkCount()<4){
+        if(gameRoom.getPeopleCount()<4){
             gameRoom.addUserCount();
-            //user 생성하고 턴부여
-            //resource , farm 생성하고 build
-            //user id 제공
-            return true;
+            return gameRoom.getPeopleCount();
 
-        } else if (gameRoom.checkCount()==4) {
-            initGame();
-            return true;
+        } else if (gameRoom.getPeopleCount()==4) {
+            return gameRoom.getPeopleCount();
         } else{
-            return false;
+            return -1;
         }
     }
     public void initGame(){
