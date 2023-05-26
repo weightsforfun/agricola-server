@@ -1,5 +1,6 @@
 package com.example.demo.domain.resource.api;
 
+import com.example.demo.domain.resource.dto.ResourceDto;
 import com.example.demo.global.dto.CommonReq;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,10 +15,10 @@ public class ResourceApi {
     private final SimpMessagingTemplate template;
 
     @MessageMapping(value = "/resource/update")
-    public void updateResource(CommonReq request){
+    public void updateResource(ResourceDto resourceDto){
         //자원 업데이트
-        template.convertAndSend("/sub/game-room/"+request.getRoomId()
-        ,request.getUserId()+"th user's resource updated");
+        template.convertAndSend("/sub/game-room/"+resourceDto.getRoomId()
+        ,resourceDto);
     }
 
 }

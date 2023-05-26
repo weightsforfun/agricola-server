@@ -1,6 +1,6 @@
 package com.example.demo.domain.farm.api;
 
-import com.example.demo.global.dto.CommonReq;
+import com.example.demo.domain.farm.dto.FarmDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -14,10 +14,10 @@ public class FarmApi {
     private final SimpMessagingTemplate template;
 
     @MessageMapping(value = "/farm/update")
-    public void updateFarm(CommonReq request){
+    public void updateFarm(FarmDto message){
         //농장업데이트
-        template.convertAndSend("/sub/game-room/"+request.getRoomId(),
-                request.getUserId()+"th user's farm updated");
+        template.convertAndSend("/sub/game-room/"+message.getRoomId(),
+                message);
     }
 
 }
