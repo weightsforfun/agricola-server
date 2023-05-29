@@ -29,7 +29,7 @@ public class UserApi {
     @MessageMapping(value = "/user/init")
     public void intiUser(StompPrincipal principal,CommonReq request){
         Integer turn = userService.initUser(request.getRoomId());
-        if(turn<4) {
+        if(turn>0 && turn<4) {
             log.info(request.getRoomId().toString());
             template.convertAndSendToUser(principal.getName(),
                     "/sub/game-room/"+request.getRoomId()
