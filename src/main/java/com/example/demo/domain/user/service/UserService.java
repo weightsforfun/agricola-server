@@ -24,9 +24,8 @@ public class UserService {
             gameRoom.addUserCount();
             return gameRoom.getPeopleCount();
 
-        } else if (gameRoom.getPeopleCount()==4) {
-            return gameRoom.getPeopleCount();
-        } else{
+        }
+        else {
             return -1;
         }
     }
