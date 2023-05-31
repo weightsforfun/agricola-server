@@ -1,6 +1,10 @@
 package com.example.demo.domain.gameRoom.entity;
 
+import com.example.demo.global.converter.StringToArrayConverter;
+import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Converter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,6 +35,10 @@ public class GameRoom {
 
     @Column
     private int people; //현재 인원수
+    @Convert(converter = StringToArrayConverter.class)
+    private List<Integer> jobCards;// 나눠줄 직업카드
+    @Convert(converter = StringToArrayConverter.class)
+    private List<Integer> subCards;// 나눠줄 보조카드
     public int getPeopleCount(){
         return this.people;
     }
