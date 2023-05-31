@@ -6,8 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class CardDto extends CommonDto {
-    private List<List<Integer>> job;
-    private List<List<Integer>> main;
-    private List<List<Integer>> sub;
+    private CardType cardType;//카드 종류
+    private int cardIndex; //카드 번호
 
 }
