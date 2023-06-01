@@ -34,9 +34,9 @@ public class GameRoomApi {
         return gameRooms;
     }
     @PostMapping()
-    public String createGameRoom(){
+    public Long createGameRoom(){
         Long gameRoomID = gameRoomService.createGameRoom();
-        return gameRoomID+"is created";
+        return gameRoomID;
     }
     @GetMapping("/{id}")
     public GameRoom findGameRoom(@PathVariable("id") Long id){
