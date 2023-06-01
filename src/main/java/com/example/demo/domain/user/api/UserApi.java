@@ -1,5 +1,6 @@
 package com.example.demo.domain.user.api;
 
+import com.example.demo.domain.user.InitUserDto;
 import com.example.demo.domain.user.service.UserService;
 import com.example.demo.global.config.websocketConfig.StompPrincipal;
 import com.example.demo.global.dto.CommonDto;
@@ -23,17 +24,17 @@ public class UserApi {
 
     @MessageMapping(value = "/user/init")
     public void intiUser(StompPrincipal principal,CommonDto req){
-        Integer turn = userService.initUser(req.getRoomId());
-        if(turn>0 && turn<4) {
+        InitUserDto initUserDto = userService.initUser(req.getRoomId());
+        if(initUserDto.isEnter() && initUserDto.getTurn()<4) {
             log.info(req.getRoomId().toString());
             template.convertAndSendToUser(principal.getName(),
                     "/sub/game-room/"+req.getRoomId()
-                    , "OK"+" "+turn);
+                    , initUserDto);
 
 
 
         }
-        else if(turn==4){
+        else if(initUserDto.getTurn()==4){
             List<List<Integer>> turnArray= new ArrayList<>();//행동버튼 초기화
             for(int i=0;i<13;i++){
                 turnArray.add(new ArrayList<>(Arrays.asList(0,3)));
@@ -49,7 +50,7 @@ public class UserApi {
 
 
 
-            template.convertAndSendToUser(principal.getName(),"/sub/game-room/"+req.getRoomId(),"OK"+" "+turn);
+            template.convertAndSendToUser(principal.getName(),"/sub/game-room/"+req.getRoomId(),initUserDto);
             template.convertAndSend("/sub/game-room/"+req.getRoomId()
                     , res);
             log.info("send turn");
