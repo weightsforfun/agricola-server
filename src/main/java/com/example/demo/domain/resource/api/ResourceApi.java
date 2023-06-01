@@ -1,7 +1,6 @@
 package com.example.demo.domain.resource.api;
 
 import com.example.demo.domain.resource.dto.ResourceDto;
-import com.example.demo.global.dto.CommonReq;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;

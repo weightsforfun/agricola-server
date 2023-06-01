@@ -2,7 +2,6 @@ package com.example.demo.domain.card.api;
 
 
 import com.example.demo.domain.card.dto.CardDto;
-import com.example.demo.global.dto.CommonReq;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
