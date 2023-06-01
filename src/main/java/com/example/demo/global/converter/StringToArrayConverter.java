@@ -15,6 +15,9 @@ public class StringToArrayConverter implements AttributeConverter<List<Integer>,
 
     @Override
     public List<Integer> convertToEntityAttribute(String dbData) {
+        if(dbData == ""){
+            return Arrays.asList();
+        }
         return Arrays.stream(dbData.split(SPLIT_CHAR))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
