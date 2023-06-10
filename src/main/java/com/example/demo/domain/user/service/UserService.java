@@ -25,8 +25,6 @@ public class UserService {
         GameRoom gameRoom = gameRoomRepository.findById(gameRoomId)
                 .orElseThrow(() -> new RuntimeException("no game room"));
 
-
-
         if(gameRoom.getPeopleCount()<4){
             List<Integer> jobCards = gameRoom.getJobCards();
             List<Integer> subCards = gameRoom.getSubCards();
@@ -55,26 +53,30 @@ public class UserService {
         }
     }
 
-    private static List<Integer> makeRandomCardList(List<Integer> numbers){
+    public List<Integer> makeRandomCardList(List<Integer> numbers){
         List<Integer> randomNumbers = getRandomNumbers(numbers, 7);
 
         return randomNumbers;
     }
-    private static List<Integer> getRandomNumbers(List<Integer> numbers, int count) {
+    public List<Integer> getRandomNumbers(List<Integer> numbers, int count) {
         List<Integer> randomNumbers = new ArrayList<>();
         Random random = new Random();
-
-        for (int i = 0; i < count; i++) {
-            int randomIndex = random.nextInt(numbers.size());
-            int randomNumber = numbers.get(randomIndex);
-
-            randomNumbers.add(randomNumber);
-
-            numbers.remove(randomIndex);
-
+        if(numbers.size()<count){
+            throw new RuntimeException("no available card");
         }
+        else {
+            for (int i = 0; i < count; i++) {
+                int randomIndex = random.nextInt(numbers.size());
+                int randomNumber = numbers.get(randomIndex);
 
-        return randomNumbers;
+                randomNumbers.add(randomNumber);
+
+                numbers.remove(randomIndex);
+
+            }
+
+            return randomNumbers;
+        }
     }
 
 
