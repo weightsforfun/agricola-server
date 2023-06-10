@@ -15,6 +15,7 @@ public class ResourceDto extends CommonDto {
     private int grain;
     private int vegetable;
     private int food;
+    private int fence;
 
 
 }
