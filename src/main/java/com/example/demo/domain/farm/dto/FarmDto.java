@@ -6,6 +6,6 @@ import lombok.Getter;
 
 @Getter
 public class FarmDto extends CommonDto {
-    private List<Integer> building;
+    private List<String> building;
     private List<List<Integer>> fence;
 }
