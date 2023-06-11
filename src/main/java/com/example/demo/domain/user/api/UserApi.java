@@ -23,7 +23,7 @@ public class UserApi {
 
 
     @MessageMapping(value = "/user/init")
-    public void intiUser(StompPrincipal principal,CommonDto req){
+    public void intiUser(StompPrincipal principal,CommonDto req) throws InterruptedException {
         InitUserDto initUserDto = userService.initUser(req.getRoomId());
         if(initUserDto.isEnter() && initUserDto.getTurn()<4) {
             log.info(req.getRoomId().toString());
@@ -51,9 +51,10 @@ public class UserApi {
 
 
             template.convertAndSendToUser(principal.getName(),"/sub/game-room/"+req.getRoomId(),initUserDto);
+            Thread.sleep(1000);
             template.convertAndSend("/sub/game-room/"+req.getRoomId()
                     , res);
-            log.info("send turn");
+
 
         }
         else{
